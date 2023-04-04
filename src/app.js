@@ -4,6 +4,8 @@ import helmet from "helmet";
 import cors from "cors";
 
 import exampleApi from "./api/example.js";
+import AppError from "./exceptions/AppError.js";
+import errorHandler from "./exceptions/errorHandler.js";
 
 const app = express();
 
@@ -17,5 +19,11 @@ app.get("/", (req, res) => {
 });
 
 app.use("/example", exampleApi);
+
+app.all("*", (req, res, next) => {
+  next(new AppError("Route not found", 404));
+});
+
+app.use(errorHandler);
 
 export default app;
