@@ -15,7 +15,7 @@ test.after.always((t) => {
 
 test.serial("check /example/help", async (t) => {
   const { response } = await t.throwsAsync(
-    got("example/runtime-err", {
+    got("example/help", {
       prefixUrl: t.context.prefixUrl,
     }).json()
   );
